@@ -1,0 +1,27 @@
+.chat-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.chat-bubble {
+  background-color: #8eb9fa;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 20px;
+  margin: 5px;
+}
+.messages-container {
+  overflow-y: scroll; /* Maintain scroll functionality for user interaction */
+  height: 600px;
+  scroll-behavior: smooth; /* Ensure smooth scrolling experience */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+  ms-overflow-style: none;
+}
