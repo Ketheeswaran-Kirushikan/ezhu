@@ -28,9 +28,15 @@ const MultipleConversations = ({ _id, token }) => {
   return (
     <>
       {conversations.length > 0 ? (
-        conversations.map((conversation) => {
+        conversations.map((conversation, index) => {
           console.log("Conversation:", conversation); // Print each conversation separately
-          return <Conversation key={conversation._id} data={conversation} />;
+          return (
+            <Conversation
+              key={conversation._id}
+              data={conversation}
+              lastIndex={index === conversations.length - 1}
+            />
+          );
         })
       ) : (
         <p>No conversations found.</p>

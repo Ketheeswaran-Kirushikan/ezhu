@@ -62,8 +62,8 @@ const InvestorTableData = () => {
             <tbody>
               {skilledPersons.map((item) => (
                 <tr key={item._id}>
-                  <td>{item.firstName}</td>
-                  <td>{item.emailAddress}</td>
+                  <td>{item.first_name}</td>
+                  <td>{item.email}</td>
                   <td>{item.district}</td>
                   <td>{item.role}</td>
                   <td>{item.createdAt}</td>

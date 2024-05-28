@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
-const CardForm = ({ stripePublicKey }) => {
+const CardForm = () => {
   const { userId } = useParams();
   const products = [
     {
@@ -27,7 +27,7 @@ const CardForm = ({ stripePublicKey }) => {
   }, [userId]);
 
   const handleToken = async (token) => {
-    console.log(token);
+    console.log("Stripe Token:", token);
 
     try {
       const response = await axios.post(
@@ -38,8 +38,10 @@ const CardForm = ({ stripePublicKey }) => {
 
       const data = response.data;
       console.log("Subscription response:", data);
+      alert("Payment successful");
     } catch (error) {
       console.error("Error processing Stripe token:", error);
+      alert("Payment failed");
     }
   };
 
@@ -71,7 +73,7 @@ const CardForm = ({ stripePublicKey }) => {
                 </button>
               </div>
               <StripeCheckout
-                stripeKey={stripePublicKey}
+                stripeKey="pk_test_51PIewdRvFH14lKkrp1Mpmk1Ft0sJi6EEj1YMYEw4SOgKrxN0TjrUhSC7mjTa6B97NM4wQGGopzqNS6xUa7tsJfjn00nfwuoRpd"
                 token={handleToken}
                 name="Monthly subscription"
                 amount={selectedProduct.price * 100} // Amount in cents

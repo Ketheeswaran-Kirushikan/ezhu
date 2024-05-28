@@ -10,3 +10,6 @@
 .conversation-item:hover {
   background-color: rgba(0, 96, 255, 1);
 }
+.selected-conversation {
+  background-color: rgba(0, 96, 255, 1);
+}

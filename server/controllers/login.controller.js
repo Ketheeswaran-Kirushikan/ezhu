@@ -24,11 +24,8 @@ const login = async (req, res) => {
     if (user) {
       const token = jwt.sign(
         { _id: user._id, userType },
-        process.env.JSON_SECRET_KEY,
-        { expiresIn: "3h" }
+        process.env.JSON_SECRET_KEY
       );
-      // console.log(token);
-      // console.log(user);
 
       // Set the JWT token in a cookie
       res.cookie("jwt", token, {
@@ -49,6 +46,15 @@ const login = async (req, res) => {
   }
 };
 
+const logout = (req, res) => {
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
+  res.status(200).send({ message: "Logged out successfully" });
+};
+
 module.exports = {
   login,
+  logout,
 };

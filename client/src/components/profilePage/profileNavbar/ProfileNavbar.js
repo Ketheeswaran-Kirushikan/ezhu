@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/file(2).png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBell,
   faGlobe,
   faMessage,
   faSearch,
@@ -11,7 +10,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ChatComponent from "../../Chat/ChatComponent";
 import "./ProfileNavbar.css";
-
+import NotificationOverlay from "../Notification/NotificationOverlay";
+import ProfileModal from "../profileEdit/profileModal/ProfileModal";
+import axios from "axios";
 const ProfileNavbar = ({ userData, token }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -32,13 +33,23 @@ const ProfileNavbar = ({ userData, token }) => {
     setIsChatOpen(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3002/Ezhu/logout");
+      localStorage.removeItem("userToken");
+      window.location.href = "/login";
+    } catch (err) {
+      console.error("Error logging out:", err);
+    }
+  };
+
   return (
     <div className="profile-nav-fixed">
       <div className="p-3 text-center profile-nav-background border-bottom">
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4 d-flex justify-content-center justify-content-md-start mb-1 mb-md-0">
-              <Link to="/">
+              <Link to="/skillworkerprofile">
                 <img src={logo} className="profile-nav-image" alt="MDB Logo" />
               </Link>
             </div>
@@ -62,11 +73,9 @@ const ProfileNavbar = ({ userData, token }) => {
                     <FontAwesomeIcon icon={faMessage} />
                   </span>
                 </Link>
-                <Link className="text-reset me-3" to="/notification">
-                  <span>
-                    <FontAwesomeIcon icon={faBell} />
-                  </span>
-                </Link>
+                <span>
+                  <NotificationOverlay userData={userData} token={token} />
+                </span>
                 <Link className="text-reset me-3" to="/cardForm">
                   <span>
                     <FontAwesomeIcon icon={faGlobe} />
@@ -82,19 +91,7 @@ const ProfileNavbar = ({ userData, token }) => {
                       <p className="m-0">{user_name}</p>
                     </span>
                   </Link>
-                  <Link
-                    to="/profileedit"
-                    state={{ userData, token }}
-                    className="btn btn-link p-0"
-                  >
-                    <img
-                      src={images}
-                      className="rounded-circle"
-                      height="32"
-                      alt="User Avatar"
-                      loading="lazy"
-                    />
-                  </Link>
+                  <ProfileModal userData={userData} token={token} />
                 </div>
               </div>
             </div>
@@ -123,22 +120,22 @@ const ProfileNavbar = ({ userData, token }) => {
           >
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item profile-nav-item">
-                <Link className="nav-link active" aria-current="page" to="#">
+                <Link className="nav-link active" aria-current="page" to="!#">
                   Community
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="!#">
                   Investors
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="!#">
                   Skills
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="!#">
                   Work shop
                 </Link>
               </li>
@@ -155,6 +152,60 @@ const ProfileNavbar = ({ userData, token }) => {
         userImage={images}
         userToken={token}
       />
+
+      <div
+        className="offcanvas offcanvas-end profile-edit-canvas"
+        tabIndex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+      >
+        <div className="offcanvas-header profile-edit-canvas-header">
+          <button
+            type="button"
+            className="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+          <div className="canvas-header-container">
+            <img
+              src={images}
+              className="rounded-circle"
+              height="80"
+              alt="User Avatar"
+              loading="lazy"
+            />
+            <h5 id="offcanvasRightLabel" className="canvas-font">
+              {user_name}
+            </h5>
+          </div>
+        </div>
+        <div className="offcanvas-body profile-offcanvas-body">
+          <ul className="profile-offcanvas-list">
+            <li className="profile-offcanvas-item">
+              <Link to="/profileedit" state={{ userData, token }}>
+                Profile management
+              </Link>
+            </li>
+            <li className="profile-offcanvas-item">
+              <Link to="/payment">Payment</Link>
+            </li>
+            <li className="profile-offcanvas-item">
+              <Link to="/followers">Followers</Link>
+            </li>
+            <li className="profile-offcanvas-item">
+              <Link to="/following-request">Following Request</Link>
+            </li>
+            <li className="profile-offcanvas-item">
+              <Link to="/settings">Settings</Link>
+            </li>
+            <li className="profile-offcanvas-item">
+              <button onClick={handleLogout} className="logOut-button-canvas">
+                Log Out
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

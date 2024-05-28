@@ -8,16 +8,16 @@ import Input from "../../../components/input/Input";
 const Investor = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    emailAddress: "",
-    phoneNumber: "",
-    birthdayDate: "",
-    nationalId: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    number: "",
+    birthDate: "",
+    nationalid: "",
     district: "",
     companyName: "",
     registrationNumber: "",
-    image: null,
+    images: null,
   });
 
   const handleChange = (e) => {
@@ -76,8 +76,8 @@ const Investor = () => {
                     type="text"
                     className="form-control inputTypeSignup"
                     id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
+                    name="first_name"
+                    value={formData.first_name}
                     onChange={handleChange}
                     placeholder="Enter your first name"
                     required
@@ -91,8 +91,8 @@ const Investor = () => {
                     type="text"
                     className="form-control inputTypeSignup"
                     id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
+                    name="last_name"
+                    value={formData.last_name}
                     onChange={handleChange}
                     placeholder="Enter your last name"
                     required
@@ -107,8 +107,8 @@ const Investor = () => {
                     type="email"
                     className="form-control inputTypeSignup"
                     id="emailAddress"
-                    name="emailAddress"
-                    value={formData.emailAddress}
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter your email address"
                     required
@@ -122,8 +122,8 @@ const Investor = () => {
                     type="tel"
                     className="form-control inputTypeSignup"
                     id="phoneNumber"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
+                    name="number"
+                    value={formData.number}
                     onChange={handleChange}
                     placeholder="Enter your phone number"
                     required
@@ -137,8 +137,8 @@ const Investor = () => {
                     type="date"
                     className="form-control inputTypeSignup"
                     id="birthDate"
-                    name="birthdayDate"
-                    value={formData.birthdayDate}
+                    name="birthDate"
+                    value={formData.birthDate}
                     onChange={handleChange}
                     placeholder="Select your birth date"
                     required
@@ -152,8 +152,8 @@ const Investor = () => {
                     type="text"
                     className="form-control inputTypeSignup"
                     id="nationalId"
-                    name="nationalId"
-                    value={formData.nationalId}
+                    name="nationalid"
+                    value={formData.nationalid}
                     onChange={handleChange}
                     placeholder="Enter your national ID number"
                     required
@@ -214,7 +214,7 @@ const Investor = () => {
                     accept="image/*"
                     className="form-control inputTypeSignup"
                     id="image"
-                    name="image"
+                    name="images"
                     onChange={handleImageChange}
                     required
                   />

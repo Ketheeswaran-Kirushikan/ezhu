@@ -13,6 +13,7 @@ const postRoutes = require("../routes/post.route");
 const messageRoutes = require("../routes/message.route"); // Corrected route name here
 const databaseConnect = require("../DB/database");
 const paymentRoutes = require("../routes/payment.route");
+const followRoutes = require("../routes/userfollower.route");
 
 const PORT = 3002;
 const app = express();
@@ -35,6 +36,7 @@ app.use("/Ezhu/Investor", investorRoutes);
 app.use("/Ezhu/Investor/Request", requestInvestorRoutes);
 app.use("/Ezhu/chat", messageRoutes);
 app.use("/Ezhu/userpayment", paymentRoutes); // Corrected route here
+app.use("/Ezhu/follow", followRoutes); // Corrected route here
 
 databaseConnect()
   .then(() => {

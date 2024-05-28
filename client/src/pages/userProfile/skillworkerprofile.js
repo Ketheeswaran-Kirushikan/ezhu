@@ -4,6 +4,7 @@ import ProfileNavbar from "../../components/profilePage/profileNavbar/ProfileNav
 import TopContainer from "../../components/profilePage/top-container/TopContainer";
 import ProfilePost from "../../components/profilePage/profile-post/ProfilePost";
 import ProfileAddPost from "../../components/profilePage/profile-add-post/ProfileAddPost";
+import ProfileRequestCards from "../../components/profilePage/profileCard/ProfileRequestCards";
 
 const SkillWorkerProfile = () => {
   const location = useLocation();
@@ -22,14 +23,15 @@ const SkillWorkerProfile = () => {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 w-full z-10">
-        <ProfileNavbar userData={userData} token={token} />{" "}
-        {/* Pass token to ProfileNavbar */}
+      <ProfileNavbar userData={userData} token={token} />{" "}
+      {/* Pass token to ProfileNavbar */}
+      <div className="mt-8" style={{ marginTop: "180px" }}>
+        <TopContainer userData={userData} />
+        <ProfileAddPost userData={userData} token={token} />{" "}
+        {/* Pass token to ProfileAddPost */}
+        <ProfilePost userData={userData} />
+        <ProfileRequestCards userData={userData} token={token} />
       </div>
-      <TopContainer userData={userData} />
-      <ProfileAddPost userData={userData} token={token} />{" "}
-      {/* Pass token to ProfileAddPost */}
-      <ProfilePost userData={userData} />
     </div>
   );
 };

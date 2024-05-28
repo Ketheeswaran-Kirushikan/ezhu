@@ -65,11 +65,11 @@ const InvestorTable = () => {
                   className={index % 2 === 0 ? "even-row" : "odd-row"}
                 >
                   <td>{item._id}</td>
-                  <td>{item.firstName}</td>
-                  <td>{item.emailAddress}</td>
+                  <td>{item.first_name}</td>
+                  <td>{item.email}</td>
                   <td>{item.role}</td>
                   <td>{item.district}</td>
-                  <td>{item.nationalId}</td>
+                  <td>{item.nationalid}</td>
                   <td className="table-button">
                     <Investormodel
                       user={item}

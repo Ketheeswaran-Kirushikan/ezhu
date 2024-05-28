@@ -10,6 +10,7 @@ const handlePayment = async (req, res) => {
       Math.random().toString(36).substring(2, 15)
     );
   };
+
   try {
     const { token, selectedProduct, userId } = req.body;
     console.log(selectedProduct, userId);
@@ -19,6 +20,8 @@ const handlePayment = async (req, res) => {
       UserModel = SkilledPersonRequest;
     } else if (selectedProduct.role === "investor") {
       UserModel = InvestorRequest;
+    } else {
+      return res.status(400).json({ error: "Invalid role specified" });
     }
 
     const user = await UserModel.findById(userId);
@@ -51,7 +54,7 @@ const handlePayment = async (req, res) => {
       paymentMethod: "Stripe",
       transactionId: transactionId,
       paymentDate: paymentDate,
-      created_by: updatedUser.created_by,
+      created_by: updatedUser.created_by, // Ensure this field exists and is set correctly
       role: updatedUser.role,
     });
 

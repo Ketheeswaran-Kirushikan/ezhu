@@ -67,6 +67,14 @@ const InvestorSignupSchema = new mongoose.Schema({
       type: Date,
     },
   },
+  followers: {
+    type: Array,
+    default: [],
+  },
+  followRequest: {
+    type: Array,
+    default: [],
+  },
 });
 
 const Investor = mongoose.model("Investor", InvestorSignupSchema);

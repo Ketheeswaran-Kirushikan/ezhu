@@ -48,21 +48,21 @@ const InvestorDetailModel = ({ user, onClose }) => {
         <Modal.Body>
           <p>User ID: {user._id}</p>
           <p>
-            User Name: {user.firstName} {user.lastName}
+            User Name: {user.first_name} {user.last_name}
           </p>
-          <p>Email: {user.emailAddress}</p>
-          <p>Number: {user.phoneNumber}</p>
-          <p>Birth Date: {new Date(user.birthdayDate).toLocaleDateString()}</p>
-          <p>National ID: {user.nationalId}</p>
+          <p>Email: {user.email}</p>
+          <p>Number: {user.number}</p>
+          <p>Birth Date: {new Date(user.birthDate).toLocaleDateString()}</p>
+          <p>National ID: {user.nationalid}</p>
           <p>District: {user.district}</p>
           <p>Company Name: {user.companyName}</p>
           <p>Registration Number: {user.registrationNumber}</p>
           <p>Role: {user.role}</p>
           <p>
             Image:{" "}
-            {user.image && (
+            {user.images && (
               <img
-                src={user.image}
+                src={user.images}
                 alt="Design"
                 style={{ width: "100px", height: "auto" }}
               />

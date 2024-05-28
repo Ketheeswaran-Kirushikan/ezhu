@@ -16,9 +16,9 @@ import InvestorManagement from "./pages/admin.pages/admin-investors/investormana
 import SkillWorkerProfile from "./pages/userProfile/skillworkerprofile";
 import CardForm from "./components/Payment/CardForm";
 import ProfileEdit from "./components/profilePage/profileEdit/ProfileEdit";
+import ProfileView from "./components/profilePage/profileEdit/ProfileView";
+
 function App() {
-  const stripePublicKey =
-    "pk_test_51PIewdRvFH14lKkrp1Mpmk1Ft0sJi6EEj1YMYEw4SOgKrxN0TjrUhSC7mjTa6B97NM4wQGGopzqNS6xUa7tsJfjn00nfwuoRpd";
   return (
     <Router>
       <Routes>
@@ -38,11 +38,9 @@ function App() {
         />
         <Route path="/investormanagement" element={<InvestorManagement />} />
         <Route path="/skillworkerprofile" element={<SkillWorkerProfile />} />
-        <Route
-          path="/cardForm/:userId"
-          element={<CardForm stripePublicKey={stripePublicKey} />}
-        />
+        <Route path="/cardForm/:userId" element={<CardForm />} />
         <Route path="/profileedit" element={<ProfileEdit />} />
+        <Route path="/profileview" element={<ProfileView />} />
       </Routes>
     </Router>
   );

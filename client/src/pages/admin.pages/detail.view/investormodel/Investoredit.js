@@ -69,7 +69,7 @@ const Investoredit = ({ user, onClose }) => {
               <Input
                 type="text"
                 name="firstName"
-                value={editedUser.firstName}
+                value={editedUser.first_name}
                 onChange={handleInputChange}
                 className="inputTypeEdit"
               />
@@ -79,7 +79,7 @@ const Investoredit = ({ user, onClose }) => {
               <Input
                 type="text"
                 name="lastName"
-                value={editedUser.lastName}
+                value={editedUser.last_name}
                 onChange={handleInputChange}
                 className="inputTypeEdit"
               />
@@ -89,7 +89,7 @@ const Investoredit = ({ user, onClose }) => {
               <Input
                 type="email"
                 name="emailAddress"
-                value={editedUser.emailAddress}
+                value={editedUser.email}
                 onChange={handleInputChange}
                 className="inputTypeEdit"
               />
@@ -99,7 +99,7 @@ const Investoredit = ({ user, onClose }) => {
               <Input
                 type="text"
                 name="phoneNumber"
-                value={editedUser.phoneNumber}
+                value={editedUser.number}
                 onChange={handleInputChange}
                 className="inputTypeEdit"
               />
@@ -109,7 +109,7 @@ const Investoredit = ({ user, onClose }) => {
               <Input
                 type="date"
                 name="birthdayDate"
-                value={editedUser.birthdayDate}
+                value={editedUser.birthDate}
                 onChange={handleInputChange}
                 className="inputTypeEdit"
               />
@@ -129,7 +129,7 @@ const Investoredit = ({ user, onClose }) => {
               <Input
                 type="text"
                 name="nationalId"
-                value={editedUser.nationalId}
+                value={editedUser.nationalid}
                 readOnly
                 className="inputTypeEdit"
               />
@@ -146,9 +146,9 @@ const Investoredit = ({ user, onClose }) => {
             </div>
             <p>
               Image:{" "}
-              {editedUser.image && (
+              {editedUser.images && (
                 <img
-                  src={editedUser.image}
+                  src={editedUser.images}
                   alt="Design"
                   style={{ width: "100px", height: "auto" }}
                 />

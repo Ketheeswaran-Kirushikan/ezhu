@@ -74,6 +74,14 @@ const userSchema = new mongoose.Schema({
   bio: {
     type: String,
   },
+  followers: {
+    type: Array,
+    default: [],
+  },
+  followRequest: {
+    type: Array,
+    default: [],
+  },
 });
 
 const Skilledperson = mongoose.model("Skilledperson", userSchema);

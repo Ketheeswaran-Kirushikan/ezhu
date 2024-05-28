@@ -25,6 +25,24 @@ const ProfileEdit = () => {
     password: "",
     bio: userData?.bio || "", // Initialize bio from userData if available
   });
+  const handleCancel = () => {
+    setFormData({
+      user_name: userData?.user_name || "",
+      first_name: userData?.first_name || "",
+      last_name: userData?.last_name || "",
+      email: userData?.email || "",
+      number: userData?.number || "",
+      gender: userData?.gender || "",
+      birthDate: userData?.birthDate || "",
+      skill: userData?.skill || "",
+      district: userData?.district || "",
+      images: userData?.images || "",
+      password: "",
+      bio: userData?.bio || "",
+      confirmPassword: "", // Reset confirmPassword as well
+    });
+    setIsEditing(false); // Close the edit mode
+  };
 
   const [errors, setErrors] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -78,7 +96,7 @@ const ProfileEdit = () => {
     setTimeout(() => {
       setLoading(false);
       setIsEditing(true);
-    }, 2000); // 2-second delay
+    }, 2000);
   };
 
   if (!userData || !token) {
@@ -104,10 +122,11 @@ const ProfileEdit = () => {
                 }}
               />
             </div>
-            <div className="edit-button">
+            <div className="button-row">
               <button className="btn btn-primary" onClick={toggleEdit}>
                 Edit Profile
               </button>
+              <button className="btn btn-primary">Followers</button>
             </div>
             <div className="user-details-side-bar">
               <h4>Name: {userData.first_name}</h4>
@@ -293,13 +312,19 @@ const ProfileEdit = () => {
                       >
                         Save Changes
                       </button>
+                      <button
+                        type="submit"
+                        className="btn btn-outline-danger profile-edit-save-button"
+                        onClick={handleCancel}
+                      >
+                        cancel
+                      </button>
                     </div>
                   </form>
                 )
               )}
             </div>
             <ProfileAddPost userData={userData} token={token} />{" "}
-            {/* Pass token to ProfileAddPost */}
             <ProfileEditablePost userData={userData} />
           </div>
         </div>

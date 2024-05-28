@@ -3,10 +3,11 @@ const InvestorPersonRequest = require("../models/investor.request.model");
 const { uploadInvestor } = require("../utils/multer");
 const cors = require("cors");
 const express = require("express");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SEND_GRID_MAIL_API_SECRET_KEY);
 
 const app = express();
 app.use(cors);
-
 const verifyUser = async (req, res) => {
   try {
     console.log("Request Parameters:", req.params);
@@ -19,12 +20,12 @@ const verifyUser = async (req, res) => {
     }
 
     const newUser = new Investors({
-      firstName: userRequest.first_name,
-      lastName: userRequest.last_name,
-      emailAddress: userRequest.email,
-      phoneNumber: userRequest.number,
-      birthdayDate: userRequest.birthDate,
-      nationalId: userRequest.nationalid,
+      first_name: userRequest.first_name,
+      last_name: userRequest.last_name,
+      email: userRequest.email,
+      number: userRequest.number,
+      birthDate: userRequest.birthDate,
+      nationalid: userRequest.nationalid,
       district: userRequest.district,
       companyName: userRequest.companyName,
       registrationNumber: userRequest.registrationNumber,
@@ -33,16 +34,22 @@ const verifyUser = async (req, res) => {
     });
     await newUser.save();
     await InvestorPersonRequest.findByIdAndDelete(_id);
+    const msg = {
+      to: userRequest.email,
+      from: "kirushikanketheeswaran@gmail.com",
+      subject: "Welcome to Ezhu",
+      text: `Hello ${userRequest.first_name},\n\nYour payment has been successfully completed.\n\nClick on the following link to proceed with your account setup: http://localhost:3000/login\n\nYour email: ${userRequest.email}\nPassword: ${userRequest.password}\n\nThank you!`,
+      html: `<h3>Hello ${userRequest.first_name},</h3><p>Your payment has been successfully completed.</p><p><a href="http://localhost:3000/login">Click here</a> to proceed with your account setup.</p><br><p>Your email: ${userRequest.email}<br>Password: ${newUser.password}<br><p>Thank you!</p>`,
+    };
+
+    await sgMail.send(msg);
 
     res.status(200).json({
-      message: "User verified and moved to skilled person model successfully",
+      message: "User verified and moved to investors model successfully",
       user: newUser,
     });
   } catch (error) {
-    console.error(
-      "Error verifying user and moving to skilled person model:",
-      error
-    );
+    console.error("Error verifying user and moving to investors model:", error);
     res.status(500).json({ error: "Verification and move process failed" });
   }
 };
